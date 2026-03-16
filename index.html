@@ -149,151 +149,57 @@
             padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 4vw, 2rem) 1rem;
             text-align: center;
             background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
-<style>
-<meta timestamp="2026-03-16 10:49" />
 
-<!-- Profile Section - Single Block -->
-<div class="profile-section">
-    <!-- Avatar with Status Indicator -->
-    <div class="avatar-wrapper">
-        <div class="avatar-container">
-            <div class="avatar" id="avatarInitials">
-                <img src="https://github.com/kovendan16/card/blob/main/Bairavi%20(1).png?raw=true"  
-                     width="200" 
-                     height="200" 
-                     alt="Bairavi"
-                     style="object-fit: cover; border-radius: 50%; display: block; margin: 0 auto;"
-                     onerror="this.style.display='none'; this.parentElement.textContent='BR';">
-            </div>
-            <!-- Green Status Indicator - Bottom Right of Avatar -->
-            <div class="status-indicator" title="Available for meetings"></div>
-        </div>
-    </div>
-    
-    <!-- Profile Info - Each on New Line -->
-    <div class="profile-info">
-        <h1 class="profile-name" id="profileName">Bairavi</h1>
-        <p class="profile-title" id="profileTitle">Corporate Relation Executive</p>
-        <div class="profile-company">
-            <i class="bi bi-building"></i>
-            <span>Verifitech</span>
-        </div>
-    </div>
-</div>
+        /* Avatar Wrapper - Centers Everything */
+        .avatar-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
-<style>
-/* Profile Section - Single Block Centered */
-.profile-section {
-    padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 4vw, 2rem) 1rem;
-    text-align: center;
-    background: var(--card-bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
+        /* Avatar Container - Flex Center */
+        .avatar-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Avatar Wrapper - Centers Everything */
-.avatar-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+        /* Avatar Circle */
+        .avatar {
+            width: clamp(100px, 25vw, 180px);
+            height: clamp(100px, 25vw, 180px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: clamp(2.5rem, 6vw, 3rem);
+            font-weight: 700;
+            box-shadow: 0 10px 40px rgba(26, 194, 193, 0.3);
+            border: 4px solid var(--card-bg);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
 
-/* Avatar Container - Flex Center */
-.avatar-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
 
-/* Avatar Circle */
-.avatar {
-    width: clamp(100px, 25vw, 180px);
-    height: clamp(100px, 25vw, 180px);
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: clamp(2.5rem, 6vw, 3rem);
-    font-weight: 700;
-    box-shadow: 0 10px 40px rgba(26, 194, 193, 0.3);
-    border: 4px solid var(--card-bg);
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-}
-
-/* Green Status Indicator - Bottom Right Position */
-.status-indicator {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: clamp(20px, 5vw, 24px);
-    height: clamp(20px, 5vw, 24px);
-    background: #10b981;
-    border: 3px solid var(--card-bg);
-    border-radius: 50%;
-    z-index: 2;
-    animation: pulse-status 2s infinite;
-}
-
-@keyframes pulse-status {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-}
-
-/* Profile Info - Each Element New Line */
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
-}
-
-.profile-name {
-    font-size: clamp(1.5rem, 5vw, 1.75rem);
-    font-weight: 800;
-    color: var(--text-primary);
-    margin: 0;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-}
-
-.profile-title {
-    color: var(--primary);
-    font-weight: 600;
-    font-size: clamp(0.9rem, 3vw, 1rem);
-    margin: 0;
-    line-height: 1.2;
-}
-
-.profile-company {
-    color: var(--gray);
-    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0;
-    line-height: 1.2;
-}
-
+        /* Green Status Indicator - Bottom Right Position */
         .status-indicator {
             position: absolute;
             bottom: 5px;
@@ -312,19 +218,30 @@
             50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
         }
 
+        /* Profile Info - Each Element New Line */
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
         .profile-name {
             font-size: clamp(1.5rem, 5vw, 1.75rem);
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 0.25rem;
+            margin: 0;
             letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         .profile-title {
             color: var(--primary);
             font-weight: 600;
             font-size: clamp(0.9rem, 3vw, 1rem);
-            margin-bottom: 0.5rem;
+            margin: 0;
+            line-height: 1.2;
         }
 
         .profile-company {
@@ -334,12 +251,14 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            margin: 0;
+            line-height: 1.2;
         }
 
-        /* Quick Actions Grid - Bootstrap Responsive */
+        /* Quick Actions Grid - 4 columns to fit all in one row */
         .actions-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: clamp(0.5rem, 2vw, 1rem);
             padding: 0 clamp(1rem, 4vw, 2rem) clamp(1rem, 3vw, 1.5rem);
         }
@@ -367,14 +286,14 @@
         }
 
         .action-icon {
-            width: clamp(40px, 10vw, 48px);
-            height: clamp(40px, 10vw, 48px);
+            width: clamp(36px, 9vw, 44px);
+            height: clamp(36px, 9vw, 44px);
             border-radius: 14px;
             background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.25rem, 4vw, 1.5rem);
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
             color: var(--primary);
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
@@ -387,7 +306,7 @@
         }
 
         .action-label {
-            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            font-size: clamp(0.6rem, 1.8vw, 0.75rem);
             font-weight: 600;
             text-align: center;
         }
@@ -405,7 +324,7 @@
             background: var(--light-gray);
             border-radius: 16px;
             margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
+            transition: all 0.3 ease;
             cursor: pointer;
             text-decoration: none;
             color: var(--text-primary);
@@ -800,58 +719,32 @@
                                  style="margin-bottom: 8px;"> 
                         </div>
                     </div>
-<!-- Profile 
-<div class="profile-section">
-    <div class="avatar-container">
-        <div class="avatar" id="avatarInitials">
-            <img src="https://github.com/kovendan16/card/blob/main/Bairavi%20(1).png?raw=true"  
-                 width="250" 
-                 height="250" 
-                 alt="Bairavi"
-                 style="object-fit: cover; border-radius: 50%; display: block; margin: 0 auto;"
-                 onerror="this.style.display='none'; this.parentElement.textContent='BR';">
-        </div>
-    </div>
-   
-</div>
 
-                       < <div class="status-indicator" title="Available for meetings"></div>
+                    <!-- Profile Section with Avatar Wrapper -->
+                    <div class="profile-section">
+                        <div class="avatar-wrapper">
+                            <div class="avatar-container">
+                                <div class="avatar" id="avatarInitials">
+                                    <img src="https://github.com/kovendan16/card/blob/main/Bairavi%20(1).png?raw=true"  
+                                         width="200" 
+                                         height="200" 
+                                         alt="Bairavi"
+                                         style="object-fit: cover; border-radius: 50%; display: block; margin: 0 auto;"
+                                         onerror="this.style.display='none'; this.parentElement.textContent='BR';">
+                                </div>
+                                <div class="status-indicator" title="Available for meetings"></div>
+                            </div>
                         </div>
+                       
                         <h1 class="profile-name" id="profileName">Bairavi</h1>
                         <p class="profile-title" id="profileTitle">Corporate Relation Executive</p>
                         <div class="profile-company">
                             <i class="bi bi-building"></i>
                             <span>Verifitech</span>
                         </div>
-                    </div> -->
-                   <!-- <meta timestamp="2026-03-16 10:18" /> -->
+                    </div>
 
-<!-- Profile -->
-<div class="profile-section">
-    <div class="avatar-container">
-        <div class="avatar" id="avatarInitials">
-            <img src="https://github.com/kovendan16/card/blob/main/Bairavi%20(1).png?raw=true"  
-                 width="200" 
-                 height="200" 
-                 alt="Bairavi"
-                 style="object-fit: cover; border-radius: 50%; display: block; margin: 0 auto;"
-                 onerror="this.style.display='none'; this.parentElement.textContent='BR';">
-        </div>
-        <div class="status-indicator" title="Available for meetings"></div>
-    </div>
-   
-    <h1 class="profile-name" id="profileName">Bairavi</h1>
-    <p class="profile-title" id="profileTitle">Corporate Relation Executive</p>
-    <div class="profile-company">
-        <i class="bi bi-building"></i>
-        <span>Verifitech</span>
-    </div>
-</div>
-
-                    
-            
-                    
-                    <!-- Quick Actions -->
+                    <!-- Quick Actions - 4 columns -->
                     <div class="actions-grid">
                         <a href="tel:+919240262314" class="action-btn" onclick="trackAction('call')">
                             <div class="action-icon"><i class="bi bi-telephone-fill"></i></div>
@@ -865,12 +758,10 @@
                             <div class="action-icon"><i class="bi bi-whatsapp"></i></div>
                             <span class="action-label">WhatsApp</span>
                         </a>
-                        <!-- LinkedIn commented out-->
                         <a href="https://www.linkedin.com/in/e-k-nagarajan-vt" class="action-btn" onclick="trackAction('linkedin')">
                             <div class="action-icon"><i class="bi bi-linkedin"></i></div>
                             <span class="action-label">LinkedIn</span>
                         </a>
-                    
                     </div>
 
                     <!-- Contact Details -->
@@ -905,24 +796,12 @@
                         <div class="contact-item" onclick="copyAddress()" style="cursor: pointer;">
                             <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
                             <div class="contact-info">
-                                <div class="contact-label">Locatio</div>
+                                <div class="contact-label">Location</div>
                                 <div class="contact-value">India | USA | UAE</div>
                             </div>
                             <i class="bi bi-copy text-muted"></i>
                         </div>
                     </div>
-
-                    <!-- Meeting Context (Lead Qualification) 
-                    <div class="context-section">
-                        <div class="context-title">How did we meet?</div>
-                        <div class="context-chips">
-                            <button class="context-chip" onclick="selectContext(this, 'conference')">Conference</button>
-                            <button class="context-chip" onclick="selectContext(this, 'referral')">Referral</button>
-                            <button class="context-chip" onclick="selectContext(this, 'linkedin')">LinkedIn</button>
-                            <button class="context-chip" onclick="selectContext(this, 'event')">Event</button>
-                            <button class="context-chip" onclick="selectContext(this, 'other')">Other</button>
-                        </div>
-                    </div> -->
 
                     <!-- Primary CTAs -->
                     <div class="cta-section">
@@ -930,11 +809,7 @@
                             <i class="bi bi-person-plus-fill"></i>
                             Save Contact
                         </button>
-                        <!--<a href="https://calendly.com/vikram-verifitech/30min" class="btn-schedule" target="_blank">
-                            <i class="bi bi-calendar-check"></i>
-                            Schedule 30-Min Meeting
-                        </a>
-                    </div-->
+                    </div>
 
                     <!-- Footer / Credibility -->
                     <div class="card-footer">
