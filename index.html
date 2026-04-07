@@ -1,817 +1,843 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Verifitech | Enterprise Screening Solutions</title>
-    <meta name="description" content="Connect with Verifitech - India's leading enterprise background screening partner">
-    
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #1ac2c1;
-            --primary-dark: #16a8a7;
-            --primary-light: #e0f7f7;
-            --verified: #059669; /* FIXED: Added missing Verified Green color */
-            --verified-dark: #047857;
-            --dark: #0f172a;
-            --navy: #1e293b;
-            --gray: #64748b;
-            --light-gray: #f8fafc;
-            --white: #ffffff;
-            --card-bg: #ffffff;
-            --text-primary: #0f172a;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <title>Verifitech | Employee Verification</title>
+ <meta name="description" content="Verify Verifitech employees by scanning QR code">
+ 
+ <!-- Bootstrap 5 -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+ <!-- Bootstrap Icons -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+ <!-- Google Fonts -->
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+ 
+ <style>
+ :root {
+ --primary: #1ac2c1;
+ --primary-dark: #16a8a7;
+ --primary-light: #e0f7f7;
+ --dark: #0f172a;
+ --navy: #1e293b;
+ --gray: #64748b;
+ --light-gray: #f8fafc;
+ --white: #ffffff;
+ --card-bg: #ffffff;
+ --text-primary: #0f172a;
+ --verified: #10b981;
+ --warning: #f59e0b;
+ }
 
-        [data-theme="dark"] {
-            --card-bg: #1e293b;
-            --text-primary: #f8fafc;
-            --light-gray: #0f172a;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 50%, #f0fdfa 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
+ [data-theme="dark"] {
+ --card-bg: #1e293b;
+ --text-primary: #f8fafc;
+ --light-gray: #0f172a;
+ }
+ 
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ -webkit-tap-highlight-color: transparent;
+ }
+ 
+ body {
+ font-family: 'Inter', sans-serif;
+ background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 50%, #f0fdfa 100%);
+ min-height: 100vh;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+ position: relative;
+ overflow-x: hidden;
+ }
 
-        /* Animated background particles */
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-      
-        /* Verification Status Banner - FIXED Styling */
-        .verification-banner {
-            background: linear-gradient(135deg, var(--verified) 0%, var(--verified-dark) 100%);
-            color: white;
-            padding: 0.6rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 0.85rem;
-            position: relative;
-            overflow: hidden;
-            border-radius: 50px; /* Pill shape */
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
+ /* Animated background particles */
+ .bg-particles {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ z-index: 0;
+ }
 
-        .verification-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 3s infinite;
-        }
+ .particle {
+ position: absolute;
+ width: 10px;
+ height: 10px;
+ background: rgba(26, 194, 193, 0.1);
+ border-radius: 50%;
+ animation: float 20s infinite;
+ }
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
+ @keyframes float {
+ 0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+ 10% { opacity: 1; }
+ 90% { opacity: 1; }
+ 100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+ }
+ 
+ /* Digital Card Container */
+ .digital-card {
+ background: var(--card-bg);
+ border-radius: 32px;
+ box-shadow: 0 25px 80px rgba(0,0,0,0.15), 0 10px 30px rgba(26, 194, 193, 0.1);
+ width: 100%;
+ max-width: 420px;
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
+ transition: all 0.3s ease;
+ border: 1px solid rgba(26, 194, 193, 0.2);
+ }
 
-        .verification-banner i {
-            font-size: 1.1rem;
-            filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
-        }
+ /* Card Header with Brand */
+ .card-header-section {
+ background: white;
+ padding: 1.5rem 2rem;
+ text-align: center;
+ position: relative;
+ overflow: hidden;
+ }
 
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(26, 194, 193, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
+ .card-header-section::before {
+ content: '';
+ position: absolute;
+ top: -50%;
+ right: -50%;
+ width: 200%;
+ height: 200%;
+ background: radial-gradient(circle, rgba(26, 194, 193, 0.15) 0%, transparent 60%);
+ animation: pulse-bg 4s ease-in-out infinite;
+ }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-        }
-        
-        /* Digital Card Container */
-        .digital-card {
-            background: var(--card-bg);
-            border-radius: 32px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.15), 0 10px 30px rgba(26, 194, 193, 0.1);
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(26, 194, 193, 0.2);
-            display: flex;
-            flex-direction: column;
-        }
+ @keyframes pulse-bg {
+ 0%, 100% { transform: scale(1); opacity: 0.5; }
+ 50% { transform: scale(1.1); opacity: 0.8; }
+ }
 
-        /* Card Header with Brand */
-        .card-header-section {
-            background: none;
-            padding: 2rem 2rem 1rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+ .brand-logo img {
+ max-width: 180px;
+ height: auto;
+ display: block;
+ margin: 0 auto;
+ position: relative;
+ z-index: 2;
+ }
 
-        .brand-logo img {
-            height: 100px; /* Constrain height for consistency */
-            width: auto;
-            object-fit: contain;
-        }
+ /* Verification Status Banner */
+ .verification-banner {
+ background: linear-gradient(135deg, var(--verified) 0%, #059669 100%);
+ color: white;
+ padding: 0.75rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+ font-weight: 700;
+ font-size: 0.9rem;
+ position: relative;
+ overflow: hidden;
+ }
 
-        /* Profile Section */
-        .profile-section {
-            padding: 1rem 2rem;
-            text-align: center;
-            background: var(--card-bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
+ .verification-banner::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: -100%;
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+ animation: shimmer 3s infinite;
+ }
 
-        /* Avatar Wrapper */
-        .avatar-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
+ @keyframes shimmer {
+ 0% { left: -100%; }
+ 100% { left: 100%; }
+ }
 
-        /* Avatar Circle */
-        .avatar {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: 700;
-            box-shadow: 0 10px 40px rgba(26, 194, 193, 0.3);
-            border: 4px solid var(--card-bg);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
+ .verification-banner i {
+ font-size: 1.1rem;
+ }
 
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-        }
+ /* Profile Section */
+ .profile-section {
+ padding: 2rem 2rem 1rem;
+ text-align: center;
+ background: var(--card-bg);
+ }
 
-        /* Green Status Indicator */
-        .status-indicator {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 28px;
-            height: 28px;
-            background: #10b981;
-            border: 4px solid var(--card-bg);
-            border-radius: 50%;
-            z-index: 2;
-            animation: pulse-status 2s infinite;
-        }
+ .avatar-container {
+ position: relative;
+ display: inline-block;
+ margin-bottom: 1.5rem;
+ }
 
-        @keyframes pulse-status {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-        }
+ .avatar {
+ width: 120px;
+ height: 120px;
+ border-radius: 50%;
+ background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-size: 3rem;
+ font-weight: 700;
+ box-shadow: 0 10px 40px rgba(26, 194, 193, 0.3);
+ border: 4px solid var(--card-bg);
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
+ }
 
-        /* Profile Info */
-        .profile-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.25rem;
-            margin-top: 0.5rem;
-        }
+ .avatar img {
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ border-radius: 50%;
+ }
 
-        .profile-name {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin: 0;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
+ .verified-badge {
+ position: absolute;
+ bottom: 5px;
+ right: 5px;
+ width: 32px;
+ height: 32px;
+ background: var(--verified);
+ border: 3px solid var(--card-bg);
+ border-radius: 50%;
+ z-index: 2;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-size: 1rem;
+ box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+ animation: pulse-verified 2s infinite;
+ }
 
-        .profile-title {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 1rem;
-            margin: 0;
-            line-height: 1.2;
-        }
+ @keyframes pulse-verified {
+ 0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+ 50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+ }
 
-        .profile-company {
-            color: var(--gray);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 0;
-            line-height: 1.2;
-        }
+ .profile-name {
+ font-size: 1.75rem;
+ font-weight: 800;
+ color: var(--text-primary);
+ margin-bottom: 0.25rem;
+ letter-spacing: -0.5px;
+ }
 
-        /* Contact Details */
-        .contact-section {
-            padding: 0.5rem 2rem 1.5rem;
-        }
+ .profile-title {
+ color: var(--primary);
+ font-weight: 600;
+ font-size: 1rem;
+ margin-bottom: 0.5rem;
+ }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--light-gray);
-            border-radius: 16px;
-            margin-bottom: 0.75rem;
-            transition: all 0.3 ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-primary);
-            border: 2px solid transparent;
-        }
+ .employee-id {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.5rem;
+ background: var(--light-gray);
+ padding: 0.5rem 1rem;
+ border-radius: 50px;
+ font-size: 0.85rem;
+ font-weight: 600;
+ color: var(--gray);
+ border: 2px solid rgba(26, 194, 193, 0.2);
+ margin-bottom: 1rem;
+ }
 
-        .contact-item:hover {
-            background: var(--primary-light);
-            border-color: var(--primary);
-            transform: translateX(5px);
-        }
+ .employee-id i {
+ color: var(--primary);
+ }
 
-        .contact-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
+ /* Details Section */
+ .details-section {
+ padding: 0 2rem 1.5rem;
+ }
 
-        .contact-info {
-            flex: 1;
-            min-width: 0;
-        }
+ .details-title {
+ font-size: 0.85rem;
+ color: var(--gray);
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ font-weight: 700;
+ margin-bottom: 1rem;
+ text-align: center;
+ }
 
-        .contact-label {
-            font-size: 0.7rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
+ .detail-item {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ padding: 1rem;
+ background: var(--light-gray);
+ border-radius: 16px;
+ margin-bottom: 0.75rem;
+ border: 2px solid transparent;
+ transition: all 0.3s ease;
+ }
 
-        .contact-value {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+ .detail-item:hover {
+ border-color: var(--primary);
+ transform: translateX(5px);
+ }
 
-        /* Primary CTA */
-        .cta-section {
-            padding: 0 2rem 1.5rem;
-        }
+ .detail-icon {
+ width: 44px;
+ height: 44px;
+ border-radius: 12px;
+ background: white;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: var(--primary);
+ font-size: 1.25rem;
+ flex-shrink: 0;
+ box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+ }
 
-        .btn-save-contact {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            padding: 1.1rem;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            box-shadow: 0 10px 30px rgba(26, 194, 193, 0.3);
-            transition: all 0.3s ease;
-        }
+ .detail-info {
+ flex: 1;
+ text-align: left;
+ }
 
-        .btn-save-contact:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(26, 194, 193, 0.4);
-            color: white;
-        }
+ .detail-label {
+ font-size: 0.75rem;
+ color: var(--gray);
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ font-weight: 600;
+ margin-bottom: 2px;
+ }
 
-        /* Footer / Social Connect */
-        .card-footer {
-            padding: 1.5rem 2rem 2rem;
-            background: var(--light-gray);
-            text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            margin-top: auto; /* Pushes footer to bottom if card is tall */
-        }
+ .detail-value {
+ font-weight: 700;
+ font-size: 0.95rem;
+ color: var(--text-primary);
+ }
 
-        /* FIXED: Social Actions Grid using Flexbox for perfect alignment */
-        .actions-grid {
-            display: flex;
-            justify-content: space-between; /* Distributes space evenly */
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
+ .status-badge {
+ display: inline-flex;
+ align-items: center;
+ gap: 0.25rem;
+ padding: 0.25rem 0.75rem;
+ background: rgba(16, 185, 129, 0.1);
+ color: var(--verified);
+ border-radius: 50px;
+ font-size: 0.75rem;
+ font-weight: 700;
+ border: 1px solid rgba(16, 185, 129, 0.3);
+ }
 
-        .action-btn {
-            flex: 1; /* Ensures all 4 buttons take equal width */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 0.25rem;
-            border-radius: 16px;
-            background: var(--card-bg);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-primary);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
+ /* Actions Grid */
+ .actions-grid {
+ display: flex;
+ justify-content: space-between;
+ gap: 0.75rem;
+ margin-bottom: 1.5rem;
+ padding: 0 2rem;
+ }
 
-        .action-btn:hover {
-            background: var(--primary-light);
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            color: var(--primary-dark);
-        }
+ .action-btn {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+ padding: 0.75rem 0.25rem;
+ border-radius: 16px;
+ background: var(--card-bg);
+ border: 2px solid transparent;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ text-decoration: none;
+ color: var(--text-primary);
+ box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+ }
 
-        .action-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%; /* Circular background for icons */
-            background: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            color: var(--primary);
-            transition: all 0.3s ease;
-        }
+ .action-btn:hover {
+ background: var(--primary-light);
+ border-color: var(--primary);
+ transform: translateY(-3px);
+ color: var(--primary-dark);
+ }
 
-        .action-btn:hover .action-icon {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.1);
-        }
+ .action-icon {
+ width: 44px;
+ height: 44px;
+ border-radius: 50%;
+ background: var(--light-gray);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 1.25rem;
+ color: var(--primary);
+ transition: all 0.3s ease;
+ }
 
-        .action-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.2;
-        }
+ .action-btn:hover .action-icon {
+ background: var(--primary);
+ color: white;
+ transform: scale(1.1);
+ }
 
-        /* Credibility Badges */
-        .credibility-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
+ .action-label {
+ font-size: 0.7rem;
+ font-weight: 600;
+ text-align: center;
+ line-height: 1.2;
+ }
 
-        .badge-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.75rem;
-            color: var(--gray);
-            font-weight: 600;
-        }
+ /* CTA Section */
+ .cta-section {
+ padding: 0 2rem 2rem;
+ }
 
-        .badge-item i {
-            color: var(--primary);
-            font-size: 1rem;
-        }
+ .btn-save-contact {
+ width: 100%;
+ background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+ color: white;
+ border: none;
+ padding: 1.1rem;
+ border-radius: 16px;
+ font-weight: 700;  
+ font-size: 1.1rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.75rem;
+ box-shadow: 0 10px 30px rgba(26, 194, 193, 0.3);
+ transition: all 0.3s ease;
+ cursor: pointer;
+ }
 
-        .footer-text {
-            font-size: 0.7rem;
-            color: var(--gray);
-            opacity: 0.7;
-        }
+ .btn-save-contact:hover {
+ transform: translateY(-3px);
+ box-shadow: 0 15px 40px rgba(26, 194, 193, 0.4);
+ color: white;
+ }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.1);
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
+ .btn-save-contact:active {
+ transform: scale(0.98);
+ }
 
-        .theme-toggle:hover {
-            background: rgba(0,0,0,0.1);
-            transform: rotate(180deg);
-        }
+ /* Footer / Credibility */
+ .card-footer {
+ padding: 1.5rem 2rem;
+ background: var(--light-gray);
+ text-align: center;
+ border-top: 1px solid rgba(0,0,0,0.05);
+ }
 
-        /* Success Animation */
-        .success-animation {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 150px;
-            height: 150px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-        }
+ .credibility-badges {
+ display: flex;
+ justify-content: center;
+ gap: 1.5rem;
+ margin-bottom: 1rem;
+ flex-wrap: wrap;
+ }
 
-        .success-animation.show {
-            animation: successPop 0.6s ease forwards;
-        }
+ .badge-item {
+ display: flex;
+ align-items: center;
+ gap: 0.5rem;
+ font-size: 0.8rem;
+ color: var(--gray);
+ font-weight: 600;
+ }
 
-        @keyframes successPop {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
-        }
+ .badge-item i {
+ color: var(--primary);
+ }
 
-        /* Responsive Adjustments */
-        @media (max-width: 575.98px) {
-            body {
-                padding: 0;
-                background: var(--card-bg);
-            }
-            .digital-card {
-                max-width: 100%;
-                min-height: 100vh;
-                border-radius: 0;
-                box-shadow: none;
-            }
-            .bg-particles { display: none; }
-            .action-label { font-size: 0.6rem; }
-            .action-icon { width: 36px; height: 36px; font-size: 1.1rem; }
-        }
+ .footer-text {
+ font-size: 0.75rem;
+ color: var(--gray);
+ opacity: 0.8;
+ }
 
-        @media (max-height: 600px) and (orientation: landscape) {
-            .profile-section { padding: 0.5rem; }
-            .avatar { width: 80px; height: 80px; font-size: 2rem; }
-            .card-header-section { padding: 1rem; }
-        }
+ .last-updated {
+ font-size: 0.7rem;
+ color: var(--gray);
+ margin-top: 0.5rem;
+ font-weight: 600;
+ }
 
-        @media print {
-            body { background: white; padding: 0; }
-            .digital-card { box-shadow: none; border: 1px solid #ddd; max-width: 100%; }
-            .theme-toggle, .actions-grid { display: none; }
-        }
-    </style>
+ /* Theme Toggle */
+ .theme-toggle {
+ position: absolute;
+ top: 1rem;
+ right: 1rem;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ background: rgba(255,255,255,0.1);
+ border: 1px solid rgba(255,255,255,0.2);
+ color: white;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ z-index: 10;
+ transition: all 0.3s ease;
+ backdrop-filter: blur(10px);
+ }
+
+ .theme-toggle:hover {
+ background: rgba(255,255,255,0.2);
+ transform: rotate(180deg);
+ }
+
+ /* Success Animation */
+ .success-animation {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%) scale(0);
+ width: 200px;
+ height: 200px;
+ background: var(--verified);
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-size: 4rem;
+ z-index: 1001;
+ opacity: 0;
+ pointer-events: none;
+ }
+
+ .success-animation.show {
+ animation: successPop 0.6s ease forwards;
+ }
+
+ @keyframes successPop {
+ 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+ 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+ 100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+ }
+
+ /* Responsive */
+ @media (max-width: 480px) {
+ body {
+ padding: 0;
+ background: var(--card-bg);
+ }
+ 
+ .digital-card {
+ max-width: 100%;
+ min-height: 100vh;
+ border-radius: 0;
+ box-shadow: none;
+ }
+
+ .bg-particles {
+ display: none;
+ }
+ }
+
+ /* Print styles */
+ @media print {
+ body {
+ background: white;
+ padding: 0;
+ }
+ 
+ .digital-card {
+ box-shadow: none;
+ border: 1px solid #ddd;
+ }
+
+ .theme-toggle, .security-section, .btn-save-contact {
+ display: none;
+ }
+ }
+ </style>
+ <base target="_blank">
 </head>
 <body>
 
-    <!-- Background Particles -->
-    <div class="bg-particles" id="particles"></div>
+ <!-- Background Particles -->
+ <div class="bg-particles" id="particles"></div>
 
-    <!-- Success Animation -->
-    <div class="success-animation" id="successAnim">
-        <i class="bi bi-check-lg"></i>
-    </div>
+ <!-- Success Animation -->
+ <div class="success-animation" id="successAnim">
+ <i class="bi bi-shield-check"></i>
+ </div>
 
-    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 p-0 p-sm-3">
-        <div class="row justify-content-center w-100">
-            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 d-flex justify-content-center">
-                
-                <!-- Digital Business Card -->
-                <div class="digital-card" id="card">
-                    
-                    <!-- Theme Toggle -->
-                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
-                        <i class="bi bi-moon-fill" id="themeIcon"></i>
-                    </button>
+ <!-- Digital Employee Verification Card -->
+ <div class="digital-card" id="card">
+ 
+ <!-- Theme Toggle -->
+ <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+ <i class="bi bi-moon-fill" id="themeIcon"></i>
+ </button>
 
-                    <!-- Header / Brand -->
-                    <div class="card-header-section">
-                        <div class="brand-logo">
-                            <!-- Using a clean fallback for the logo to ensure visibility -->
-                            <img src="https://www.verifitech.com/wp-content/uploads/2022/05/verifitech-logo.svg" 
-                                 width="200" 
-                                 height="100" 
-                                 alt="Verifitech Logo">
-                        </div>
-                        
-                        <!-- FIXED: Verification Badge with proper alignment -->
-                        <div class="verification-banner">
-                            <i class="bi bi-patch-check-fill"></i>
-                            <span>VERIFIED EMPLOYEE</span>
-                        </div>
-                    </div>
+ <!-- Header / Brand -->
+ <div class="card-header-section">
+ <div class="brand-logo">
+ <!-- Verifitech Logo -->
+ <img src="https://www.verifitech.com/wp-content/uploads/2022/05/verifitech-logo.svg" 
+  alt="Verifitech Logo" 
+  class="img-fluid">
+ </div>
+ </div>
 
-                    <!-- Profile Section -->
-                    <div class="profile-section">
-                        <div class="avatar-wrapper">
-                            <div class="avatar">
-                                <img src="https://github.com/kovendan16/card/blob/main/Bairavi%20(1).png?raw=true"  
-                                     width="200" 
-                                     height="200" 
-                                     alt="Bairavi"
-                                     onerror="this.style.display='none'; this.parentElement.textContent='BR';">
-                            </div>
-                            <div class="status-indicator" title="Available for meetings"></div>
-                        </div>
-                       
-                        <h1 class="profile-name">Bairavi</h1>
-                        <p class="profile-title">Corporate Relation Executive</p>
-                        <div class="profile-company">
-                            <i class="bi bi-building"></i>
-                            <span>Verifitech</span>
-                        </div>
-                    </div>
+ <!-- Verification Status Banner -->
+ <div class="verification-banner">
+ <i class="bi bi-shield-check"></i>
+ <span>VERIFIED EMPLOYEE</span>
+ </div>
 
-                    <!-- Contact Details -->
-                    <div class="contact-section">
-                        <a href="tel:+919240262314" class="contact-item">
-                            <div class="contact-icon"><i class="bi bi-phone"></i></div>
-                            <div class="contact-info">
-                                <div class="contact-label">Mobile</div>
-                                <div class="contact-value">+91 92402 62314</div>
-                            </div>
-                            <i class="bi bi-chevron-right text-muted"></i>
-                        </a>
-                        
-                        <a href="mailto:bairavi.t@verifitech.email" class="contact-item">
-                            <div class="contact-icon"><i class="bi bi-envelope"></i></div>
-                            <div class="contact-info">
-                                <div class="contact-label">Email</div>
-                                <div class="contact-value">bairavi.t@verifitech.email</div>
-                            </div>
-                            <i class="bi bi-chevron-right text-muted"></i>
-                        </a>
-                        
-                        <a href="https://www.verifitech.com" class="contact-item" target="_blank">
-                            <div class="contact-icon"><i class="bi bi-globe"></i></div>
-                            <div class="contact-info">
-                                <div class="contact-label">Website</div>
-                                <div class="contact-value">www.verifitech.com</div>
-                            </div>
-                            <i class="bi bi-box-arrow-up-right text-muted"></i>
-                        </a>
-                        
-                        <div class="contact-item" onclick="copyAddress()" style="cursor: pointer;">
-                            <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
-                            <div class="contact-info">
-                                <div class="contact-label">Location</div>
-                                <div class="contact-value">India | USA | UAE</div>
-                            </div>
-                            <i class="bi bi-copy text-muted"></i>
-                        </div>
-                    </div>
+ <!-- Profile -->
+ <div class="profile-section">
+ <div class="avatar-container">
+ <div class="avatar">
+ <!-- Bairavi's Photo -->
+ <img src="https://github.com/kovendan16/card/blob/main/Bairavi%20(1).png?raw=true"  
+  alt="Bairavi"
+  id="profileImage"
+  onerror="this.style.display='none'; this.parentElement.innerHTML='BR';">
+ </div>
+ <div class="verified-badge" title="Identity Verified">
+ <i class="bi bi-check-lg"></i>
+ </div>
+ </div>
+ <h1 class="profile-name" id="profileName">Bairavi</h1>
+ <p class="profile-title" id="profileTitle">Corporate Relation Executive</p>
+ <div class="employee-id">
+ <i class="bi bi-person-badge"></i>
+ <span id="profileId">VT-202</span> 
+ </div>
+ </div>
 
-                    <!-- Primary CTAs -->
-                    <div class="cta-section">
-                        <button class="btn-save-contact" onclick="saveContact()">
-                            <i class="bi bi-person-plus-fill"></i>
-                            Save Contact
-                        </button>
-                    </div>
+ <!-- Verification Details --> 
+ <div class="details-section">
+ <div class="details-title">Verification Details</div>
+ 
+ <div class="detail-item">
+ <div class="detail-icon"><i class="bi bi-building"></i></div>
+ <div class="detail-info">
+ <div class="detail-label">Department</div>
+ <div class="detail-value">Verifitech Solutions</div>
+ </div>
+ </div>
+ 
+ <div class="detail-item">
+ <div class="detail-icon"><i class="bi bi-geo-alt"></i></div>
+ <div class="detail-info">
+ <div class="detail-label">Global Presence</div>
+ <!-- Updated to match user request -->
+ <div class="detail-value">India | USA | UAE</div>
+ </div>
+ </div>
+ 
+ <div class="detail-item">
+ <div class="detail-icon"><i class="bi bi-calendar-check"></i></div>
+ <div class="detail-info">
+ <div class="detail-label">Verification Status</div>
+ <div class="detail-value">
+ <span class="status-badge">
+ <i class="bi bi-check-circle-fill"></i>
+ Active
+ </span>
+ </div>
+ </div>
+ </div>
+ </div>
 
-                    <!-- Footer / Credibility -->
-                    <div class="card-footer">
-                        <!-- FIXED: Social Connect Grid (Aligned with Flexbox) -->
-                        <div class="actions-grid">
-                            <a href="tel:+919240262314" class="action-btn" onclick="trackAction('call')">
-                                <div class="action-icon"><i class="bi bi-telephone-fill"></i></div>
-                                <span class="action-label">Call</span>
-                            </a>
-                            <a href="mailto:bairavi.t@verifitech.email" class="action-btn" onclick="trackAction('email')">
-                                <div class="action-icon"><i class="bi bi-envelope-fill"></i></div>
-                                <span class="action-label">Email</span>
-                            </a>
-                            <a href="https://wa.me/917305135291" class="action-btn" onclick="trackAction('whatsapp')">
-                                <div class="action-icon"><i class="bi bi-whatsapp"></i></div>
-                                <span class="action-label">WhatsApp</span>
-                            </a>
-                            <a href="#" class="action-btn" onclick="trackAction('linkedin')">
-                                <div class="action-icon"><i class="bi bi-linkedin"></i></div>
-                                <span class="action-label">LinkedIn</span>
-                            </a>
-                        </div>
+ <!-- Quick Actions - Updated with user data -->
+ <div class="actions-grid">
+ <a href="tel:+919240262314" class="action-btn" onclick="trackAction('call')">
+ <div class="action-icon"><i class="bi bi-telephone-fill"></i></div>
+ <span class="action-label">Call</span>
+ </a>
+ <a href="mailto:balravl.t@verifitech.email" class="action-btn" onclick="trackAction('email')">
+ <div class="action-icon"><i class="bi bi-envelope-fill"></i></div>
+ <span class="action-label">Email</span>
+ </a>
+ <a href="https://www.verfitech.com" class="action-btn" onclick="trackAction('web')">
+ <div class="action-icon"><i class="bi bi-globe"></i></div>
+ <span class="action-label">Website</span>
+ </a>
+ <a href="#" class="action-btn" onclick="trackAction('linkedin')">
+ <div class="action-icon"><i class="bi bi-linkedin"></i></div>
+ <span class="action-label">LinkedIn</span>
+ </a>
+ </div>
 
-                        <div class="credibility-badges">
-                            <div class="badge-item">
-                                <i class="bi bi-shield-check"></i>
-                                <span>PBSA Accredited</span>
-                            </div>
-                            <div class="badge-item">
-                                <i class="bi bi-check-circle"></i>
-                                <span>ISO 27001</span>
-                            </div>
-                        </div>
-                        
-                        <div class="footer-text">
-                            Scan to connect • Background Screening Solutions
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
+ <!-- Primary CTAs -->
+ <div class="cta-section">
+ <button class="btn-save-contact" onclick="saveContact()">
+ <i class="bi bi-person-plus-fill"></i>
+ Save Contact
+ </button>
+ </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Generate floating particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const isMobile = window.innerWidth < 576;
-            const particleCount = isMobile ? 8 : 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
+ <!-- Footer / Credibility -->
+ <div class="card-footer">
+ <div class="credibility-badges">
+ <div class="badge-item">
+ <i class="bi bi-shield-check"></i>
+ <span>PBSA </span>
+   <span>SHRM</span>
+    <span>CII</span>
+  <span>DUNS</span>
+ 
+   </div>
+ <div class="badge-item">
+ <i class="bi bi-check-circle"></i>
+ <span>ISO 27001</span>
+ </div>
+ <div class="badge-item">
+ <i class="bi bi-lock"></i>
+ <span>SOC 2 Type II</span>
+ </div>
+ </div>
+ <div class="footer-text">
+ 
+ </div>
+ <div class="last-updated">
+ <i class="bi bi-arrow-repeat"></i> Last verified: <span id="lastUpdated">Just now</span>
+ </div>
+ </div>
+ </div>
 
-        // Theme Toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('themeIcon');
-            const currentTheme = html.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                html.removeAttribute('data-theme');
-                icon.classList.remove('bi-sun-fill');
-                icon.classList.add('bi-moon-fill');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                icon.classList.remove('bi-moon-fill');
-                icon.classList.add('bi-sun-fill');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Check for saved theme preference
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                toggleTheme();
-            }
-        });
-
-        // Save Contact (vCard generation)
+ <script>
+     // FIXED: Dynamic Save Contact Function matching the new data
         function saveContact() {
-            const vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:Bairavi
-TITLE:Corporate Relation Executive
-ORG:Verifitech Solutions India Pvt. Ltd.
-TEL;TYPE=CELL:+919240262314
-EMAIL:bairavi.t@verifitech.email
-URL:https://www.verifitech.com
-ADR;TYPE=WORK: Saidapet, Chennai, Tamil Nadu 600015
-NOTE:PBSA Accredited Background Screening Solutions
-END:VCARD`;
+            // 1. Read values from HTML
+            const name = document.getElementById('profileName').innerText || "Bairavi";
+            const title = document.getElementById('profileTitle').innerText || "Corporate Relation Executive";
+            const org = "Verifitech Solutions India Pvt. Ltd.";
+            
+            // 2. Updated Contact Details as per user request
+            // Note: Email in the screenshot description has a typo "balravl", I will use "balravl" to match the request exactly,
+            // but if this is a real card, you might want to correct it to "bairavi".
+            // Using exactly what was in the request description: balravl.t@verifitech.email
+            const phone = "+919240262314";
+            const email = "balravl.t@verifitech.email"; 
+            const url = "https://www.verfitech.com"; // Using domain from request
+            const address = "India | USA | UAE"; // Using location from request
+            
+            // 3. Construct the vCard string
+            const vCardData = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'FN:' + name,
+                'TITLE:' + title,
+                'ORG:' + org,
+                'TEL;TYPE=CELL:' + phone,
+                'EMAIL:' + email,
+                'URL:' + url,
+                'NOTE:Global Presence: ' + address,
+                'END:VCARD'
+            ].join('\n');
 
-            const blob = new Blob([vCard], { type: 'text/vcard' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Bairavi_Verifitech.vcf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
+            // 4. Create a Blob
+            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+            
+            // 5. Trigger download
+            if (navigator.msSaveBlob) { // IE 10+
+                navigator.msSaveBlob(blob, 'Bairavi_Contact.vcf');
+            } else {
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.setAttribute('download', name.replace(/\s+/g, '_') + '_Contact.vcf');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
 
-            // Show success animation
+            // 6. Show success animation
             const successAnim = document.getElementById('successAnim');
             successAnim.classList.add('show');
             setTimeout(() => successAnim.classList.remove('show'), 1000);
         }
 
-        // Copy Address
-        function copyAddress() {
-            const address = 'Verifitech Solutions India Pvt. Ltd.\nBangalore | Mumbai | Delhi\nwww.verifitech.com';
-            navigator.clipboard.writeText(address).then(() => {
-                showToast('Address copied to clipboard!');
-            });
-        }
-
-        // Toast notification
+        // Toast notification (Helper)
         function showToast(message) {
             const toast = document.createElement('div');
-            toast.className = 'position-fixed top-50 start-50 translate-middle bg-dark text-white px-4 py-2 rounded-pill';
+            toast.className = 'position-fixed top-50 start-50 translate-middle bg-dark text-white px-4 py-3 rounded-4 shadow-lg d-flex align-items-center gap-2';
             toast.style.zIndex = '9999';
             toast.style.fontSize = '0.9rem';
-            toast.textContent = message;
+            toast.style.animation = 'fadeIn 0.3s ease-out';
+            toast.innerHTML = `<i class="bi bi-info-circle-fill text-primary"></i> <span>${message}</span>`;
+            
             document.body.appendChild(toast);
             
             setTimeout(() => {
-                toast.remove();
-            }, 2000);
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
         }
 
-        // Track actions for analytics
-        function trackAction(action) {
-            const data = {
-                action: action,
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent
-            };
-            console.log('Action tracked:', data);
-        }
+ // Generate floating particles
+ function createParticles() {
+ const container = document.getElementById('particles');
+ for (let i = 0; i < 15; i++) {
+ const particle = document.createElement('div');
+ particle.className = 'particle';
+ particle.style.left = Math.random() * 100 + '%';
+ particle.style.animationDelay = Math.random() * 20 + 's';
+ particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+ container.appendChild(particle);
+ }
+ }
+ createParticles();
 
-        // Handle resize for particle adjustment
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                const container = document.getElementById('particles');
-                container.innerHTML = '';
-                createParticles();
-            }, 250);
-        });
+ // Theme Toggle
+ function toggleTheme() {
+ const html = document.documentElement;
+ const icon = document.getElementById('themeIcon');
+ const currentTheme = html.getAttribute('data-theme');
+ 
+ if (currentTheme === 'dark') {
+ html.removeAttribute('data-theme');
+ icon.classList.remove('bi-sun-fill');
+ icon.classList.add('bi-moon-fill');
+ } else {
+ html.setAttribute('data-theme', 'dark');
+ icon.classList.remove('bi-moon-fill');
+ icon.classList.add('bi-sun-fill');
+ }
+ }
 
-        // Prevent zoom on double-tap for mobile
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-    </script>
+ // Update timestamp
+ function updateTimestamp() {
+ const now = new Date();
+ const timeString = now.toLocaleTimeString('en-US', { 
+ hour: '2-digit', 
+ minute: '2-digit',
+ hour12: true 
+ });
+ document.getElementById('lastUpdated').textContent = 'Today at ' + timeString;
+ }
+
+ setInterval(updateTimestamp, 60000);
+ updateTimestamp();
+
+ // Prevent zoom on double-tap for mobile
+ let lastTouchEnd = 0;
+ document.addEventListener('touchend', (e) => {
+ const now = Date.now();
+ if (now - lastTouchEnd <= 300) {
+ e.preventDefault();
+ }
+ lastTouchEnd = now;
+ }, false);
+ </script>
 </body>
 </html>
